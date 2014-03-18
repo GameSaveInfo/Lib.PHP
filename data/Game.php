@@ -34,7 +34,8 @@ class Game extends AXmlData {
     
     public static $types = array("game","mod","system","expansion");
     
-    public function writeToDb($con) {        
+    public function writeToDb($con) {  
+        $output = parent::writeToDb($con);
         if($this->for!=null) {
             Games::writeGameToDb($this->for,$con); 
         }
@@ -42,7 +43,7 @@ class Game extends AXmlData {
             Games::writeGameToDb($this->follows,$con);                
         }
 
-        return parent::writeToDb($con);
+        return $output;
     }
 
 
