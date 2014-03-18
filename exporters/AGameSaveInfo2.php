@@ -73,24 +73,34 @@ abstract class AGameSaveInfo2 extends AXmlExporter {
         if($version->title!=null) {
             $vele->appendChild($this->createElement("title",$version->title));            
         }
+        
+        $continue = false;
     
         foreach($version->scumm_vm as $scumm_vm) {
             $sele = $this->createElement("scummvm");
             $this->processFields($scumm_vm,$sele,array("game_version"));
             $vele->appendChild($sele);
+            $continue = true;
         }
         
         foreach($version->ps_codes as $ps_code) {
             $pele = $this->createElement("ps_code");
             $this->processFields($ps_code,$pele,array("game_version"));
             $vele->appendChild($pele);
+            $continue = true;
         }
         
         
         $lele = $this->createLocationsElement($version->locations);
         
-        if($lele!=null)
+        if($lele!=null) {
             $vele->appendChild($lele);
+            $continue = true;
+        }
+        
+        if($continue==false) {
+            return null;
+        }
 
         foreach($version->file_types as $file_type) {
             $fele = $this->createElement("files");

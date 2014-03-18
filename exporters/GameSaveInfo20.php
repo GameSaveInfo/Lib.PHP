@@ -7,6 +7,9 @@ class GameSaveInfo20 extends AGameSaveInfo2 {
     
     
     protected function createGameVersionElement($version) {
+        // The revision attribute didn't exist in 2.0, so we filter out any elements that have one,
+        // Unless the revision is zero, which we can auto-assume points to the original revision,
+        // Which we can just assume is the one already in the file, since it will also have a 0-revision
         if($version->revision!=null&&$version->revision!="0") {
             return null;
         }
@@ -15,6 +18,9 @@ class GameSaveInfo20 extends AGameSaveInfo2 {
 
 
     protected function createLocationElement($location) {
+        // The revision attribute didn't exist in 2.0, so we filter out any elements that have one,
+        // Unless the revision is zero, which we can auto-assume points to the original revision,
+        // Which we can just assume is the one already in the file, since it will also have a 0-revision
         if(property_exists($location,"revision")&&$location->revision!=null&&$location->revision!="0") {
             return null;
         }

@@ -177,13 +177,13 @@ class APIController {
     protected function export($exporter, $criteria = null,$comment = null, $date = null) {
         // If we're on the test server, then caching is disabling
         $url = $_SERVER["SERVER_NAME"];
-        if(strstr($url,"tardis")!= -1) {
+        if(strstr($url,"tardis")!= -1||strstr($url,"darkh")!= -1) {
             $nocache = true;
         } else {
             $nocache = false;
         }
         // Programmatic override for cache dissabling!
-        //$nocache = false;
+        //$nocache = true;
         
         $cache_criteria = array("exporter"=>$exporter,"criteria"=>trim($criteria,'/'));
         
