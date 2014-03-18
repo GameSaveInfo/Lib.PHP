@@ -1,9 +1,9 @@
 <?php
 ini_set('default_charset', 'UTF-8');
 $folder =  dirname(__FILE__);
-include_once $folder.'/../libs/gsi/AXmlData.php';
-include_once $folder.'/../libs/gsi/Games.php';
-require_once $folder.'/../libs/gsi/Game.php';
+include_once $folder.'/../data/AXmlData.php';
+include_once $folder.'/../data/Games.php';
+require_once $folder.'/../data/Game.php';
 
 class APIController {
     
@@ -199,7 +199,7 @@ class APIController {
         	}
         }
             $folder =  dirname(__FILE__);
-        require_once $folder.'/exporters/'.$exporter.'.php';
+        require_once $folder.'/../exporters/'.$exporter.'.php';
         
         if(!$nocache&&sizeof($cache)==1) {
             $cache = $cache[0];           
@@ -210,8 +210,8 @@ class APIController {
             $result = $this->link->Select('exporters',null,array("name"=>$exporter),array("name"=>'asc'));
             $row = $result[0];    
             
-            require_once $folder.'/../libs/gsi/Games.php';
-            require_once $folder.'/../libs/gsi/GameVersion.php';
+            require_once $folder.'/../data/Games.php';
+            require_once $folder.'/../data/GameVersion.php';
             
             $game_criteria = array("deprecated"=>0);
             $version_criteria = array("deprecated"=>0);
